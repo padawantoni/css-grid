@@ -1,17 +1,158 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat|Source+Sans+Pro:400,700&display=swap');
 
+$color:  (
+    header:#000,
+    meta:#000,
+    tags: #000,
+    content: #000,
+    footer: #000
+);
+
+$bg:  (
+    header:rgb(65, 132, 255),
+    meta:rgb(50, 255, 67),
+    tags: rgb(255, 172, 46),
+    content: rgb(126, 225, 255),
+    footer: rgb(128, 95, 69)
+);
+
+$borderRadius: (
+    radius: 0.5rem
+);
+
+$laptop-g: 1441px;
+$laptop-m: 1025px;
+$laptop-s: 769px;
+$tablet: 570px;
+$mobile-l: 425px;
+
+@mixin laptop-g {
+    @media (min-width: #{$laptop-g}) {
+        @content;
+    }
+}
+
+@mixin laptop-m {
+    @media (min-width: #{$laptop-m}) {
+        @content;
+    }
+}
+
+@mixin laptop-s {
+    @media (min-width: #{$laptop-s}) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (min-width: #{$tablet}) {
+        @content;
+    }
+}
+
+@mixin mobile-l {
+    @media (min-width: #{$mobile-l}) {
+        @content;
+    }
+}
+
+
 html {
     font-size: 62.5%;
 }
 
 body {
     font-size: 1.6rem;
+    padding: 1.5rem;
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+    "header"
+    "meta"
+    "tags"
+    "content"
+    "footer";
+    @include mobile-l {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: 
+        "header header"
+        "meta tags"
+        "content content"
+        "footer footer";
+    }
+    @include tablet {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto;
+        grid-template-areas:
+        "tags tags tags"
+        "meta meta meta"
+        "header header header"
+        "content content content"
+        "footer footer footer";
+    }
+    @include laptop-s {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-areas:
+        "tags tags tags"
+        "header header header"
+        "meta content content"
+        "footer footer footer"
+    }
+    @include laptop-m {
+        grid-template-columns: 1fr 3fr 1fr;
+        grid-template-areas:
+        "header header header"
+        "meta content tags"
+        "footer footer footer";
+    }
+}
+
+main {
+    padding: 2rem;
 }
 
 h1, h2, h3, h4, h5 {
     font-family: Montserrat, sans-serif;
+    margin: 0 0 1rem;
 }
 
 p {
     font-family: Source Sans Pro, sans-serif;
+    margin: 0 0 1rem;
+}
+
+header, footer, .post--meta, .post--tags, .post--content {
+    border-radius: map-get($map: $borderRadius, $key: radius);
+}
+
+header {
+    background-color: map-get($map: $bg, $key: header);
+    grid-area: header;
+}
+
+.post--meta {
+    background-color: map-get($map: $bg, $key: meta);
+    max-height: 10rem;
+    max-width: 50rem;
+    grid-area: meta;
+}
+
+.post--tags {
+    background-color: map-get($map: $bg, $key: tags);
+    max-width: 40rem;
+    max-height: 10rem;
+    grid-area: tags;
+}
+
+.post--content {
+    background-color: map-get($map: $bg, $key: content);
+    grid-area: content;
+}
+
+footer {
+    background-color: map-get($map: $bg, $key: footer);
+    grid-area: footer;
 }

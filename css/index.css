@@ -5,13 +5,105 @@ html {
 
 body {
   font-size: 1.6rem;
+  padding: 1.5rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: -ms-grid;
+  display: grid;
+  grid-gap: 1rem;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+      grid-template-areas: "header" "meta" "tags" "content" "footer";
+}
+
+@media (min-width: 425px) {
+  body {
+    -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "header header" "meta tags" "content content" "footer footer";
+  }
+}
+
+@media (min-width: 570px) {
+  body {
+    -ms-grid-columns: (1fr)[3];
+        grid-template-columns: repeat(3, 1fr);
+    -ms-grid-rows: auto;
+        grid-template-rows: auto;
+        grid-template-areas: "tags tags tags" "meta meta meta" "header header header" "content content content" "footer footer footer";
+  }
+}
+
+@media (min-width: 769px) {
+  body {
+    -ms-grid-columns: (1fr)[3];
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-areas: "tags tags tags" "header header header" "meta content content" "footer footer footer";
+  }
+}
+
+@media (min-width: 1025px) {
+  body {
+    -ms-grid-columns: 1fr 3fr 1fr;
+        grid-template-columns: 1fr 3fr 1fr;
+        grid-template-areas: "header header header" "meta content tags" "footer footer footer";
+  }
+}
+
+main {
+  padding: 2rem;
 }
 
 h1, h2, h3, h4, h5 {
   font-family: Montserrat, sans-serif;
+  margin: 0 0 1rem;
 }
 
 p {
   font-family: Source Sans Pro, sans-serif;
+  margin: 0 0 1rem;
+}
+
+header, footer, .post--meta, .post--tags, .post--content {
+  border-radius: 0.5rem;
+}
+
+header {
+  background-color: #4184ff;
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: header;
+}
+
+.post--meta {
+  background-color: #32ff43;
+  max-height: 10rem;
+  max-width: 50rem;
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: meta;
+}
+
+.post--tags {
+  background-color: #ffac2e;
+  max-width: 40rem;
+  max-height: 10rem;
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: tags;
+}
+
+.post--content {
+  background-color: #7ee1ff;
+  -ms-grid-row: 4;
+  -ms-grid-column: 1;
+  grid-area: content;
+}
+
+footer {
+  background-color: #805f45;
+  -ms-grid-row: 5;
+  -ms-grid-column: 1;
+  grid-area: footer;
 }
 /*# sourceMappingURL=index.css.map */
